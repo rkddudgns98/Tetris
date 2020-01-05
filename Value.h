@@ -3,6 +3,9 @@
 #include<iostream>
 #include<time.h>
 #include"Macro.h"
+#include <Windows.h>
+#include <list>
+#include "flag.h"
 
 using namespace std;
 
@@ -85,4 +88,4 @@ typedef struct _tagPosition {
 		y = pos.y;
 	}
 
-}POSITION, * PPOSITION;
+}POSITION, *PPOSITION;

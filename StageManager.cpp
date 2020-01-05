@@ -23,4 +23,5 @@ bool CStageManager::Init() {
 
 void CStageManager::Run() {
 	m_pCurStage->Render();
+
 }

@@ -13,7 +13,7 @@ CRectangle::~CRectangle()
 bool CRectangle::Init()
 {
 	if (!CShape::Init()) {
-
+		return false;
 	}
 
 	m_cShape[2][0] = '0';
@@ -23,8 +23,9 @@ bool CRectangle::Init()
 
 	m_iWidthCount = 2;
 
-	m_tPivot.x = 1;
-	m_tPivot.y = 3;
+	m_tPos.x = 4;
+	m_tPos.y = 0;
 
 	return true;
 }
+
