@@ -1,7 +1,14 @@
-#include "ShapeManager.h"
-#include "Rectangle.h"
-#include "StageManager.h"
 #include "Stage.h"
+#include "ShapeManager.h"
+#include "StageManager.h"
+
+#include "Rectangle.h"
+#include "ShapeLine.h"
+#include "ShapeGun.h"
+#include "ShapeRGun.h"
+#include "ShapeS.h"
+#include "ShapeZ.h"
+#include "ShapeT.h"
 
 CShapeManager* CShapeManager::m_pInst = NULL;
 
@@ -39,14 +46,17 @@ void CShapeManager::Update()
 
 
 			m_pNextShape = CreateRandomShape();
-		}
+		} 
 		m_iSpeed = 0;
 	}
-	if (GetAsyncKeyState('A') & 0x8000) {
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
 		m_pCurShape->MoveLeft();
 	}
-	if (GetAsyncKeyState('D') & 0x8000) {
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
 		m_pCurShape->MoveRight();
+	}
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		m_pCurShape->Rotation();
 	}
 }
 
@@ -70,9 +80,28 @@ CShape* CShapeManager::CreateShape(SHAPE_TYPE eType)
 {
 	CShape* pShape = NULL;
 
-	switch (eType) {
+	switch (eType) 
+	{
 	case ST_RECT:
 		pShape = new CRectangle;
+		break;
+	case ST_LINE:
+		pShape = new CShapeLine;
+		break;
+	case ST_GUN:
+		pShape = new CShapeGun;
+		break;
+	case ST_RGUN:
+		pShape = new CShapeRGun;
+		break;
+	case ST_S:
+		pShape = new CShapeS;
+		break;
+	case ST_Z:
+		pShape = new CShapeZ;
+		break;
+	case ST_T:
+		pShape = new CShapeT;
 		break;
 	}
 	if (!pShape->Init()) {

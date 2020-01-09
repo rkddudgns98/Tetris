@@ -1,15 +1,14 @@
 #pragma once
-
 #include "Shape.h"
 
-class CRectangle: 
+class CShapeT :
 	public CShape
 {
 public:
-	CRectangle();
-	~CRectangle();
-	
+	CShapeT();
+	~CShapeT();
+
 public:
 	virtual bool Init();
+	virtual void Rotation();
 };
-

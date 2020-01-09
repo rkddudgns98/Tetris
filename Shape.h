@@ -13,6 +13,7 @@ protected:
 	POSITION m_tPos;
 	POSITION m_tPivot;
 	int m_iWidthCount;	//기준점이 왼쪽아래이기때문에 오른쪽으로 갈 때 변수가 필요
+	int m_iDir;
 
 public:
 	char GetBlock(int x, int y) const {
@@ -39,6 +40,7 @@ public:
 
 public:
 	virtual bool Init();
+	virtual void Rotation();
 
 public:
 	void Render();

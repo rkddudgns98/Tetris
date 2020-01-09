@@ -6,7 +6,9 @@
 CCore* CCore::m_pInst = NULL;
 
 
-CCore::CCore() {
+CCore::CCore() :
+	m_bLoop(true)
+{
 	srand((unsigned int)time(0));
 }
 
@@ -29,12 +31,13 @@ bool CCore::Init(){
 }
 
 void CCore::Run() {
-	while (true) {
+	while (m_bLoop) {
 		system("cls");
 		CShapeManager::GetInst()->Update();
 
 		CStageManager::GetInst()->Run();
 		CShapeManager::GetInst()->Render();
+
 		Sleep(100);
 	}
 }

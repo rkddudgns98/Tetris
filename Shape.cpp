@@ -5,6 +5,7 @@
 
 CShape::CShape() {
 	m_iWidthCount = 0;
+	m_iDir = RD_UP;
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -25,6 +26,10 @@ bool CShape::Init()
 	return true;
 }
 
+void CShape::Rotation()
+{
+}
+
 void CShape::Render()	//도형출력
 {
 	for (int i = 0; i < 4; i++) {
@@ -32,14 +37,16 @@ void CShape::Render()	//도형출력
 		if (iYIndex < 0)
 			continue;
 
-		//콘솔창에 출력할 좌표를 설정한 후에 출력한다
-		CCore::GetInst()->SetConsolePos(m_tPos.x, iYIndex);
 		for (int j = 0; j < 4; j++) {
 			if (m_tPos.x + j >= STAGE_WIDTH)	//오른쪽으로갈때 벽이 안뚫리게 예외처리
 				continue;
 
-			if (m_cShape[i][j] == '0')
+			if (m_cShape[i][j] == '0') {
+				//콘솔창에 출력할 좌표를 설정한 후에 출력한다
+				CCore::GetInst()->SetConsolePos(m_tPos.x + j, iYIndex);
+
 				cout << "■";
+			}
 		}
 		cout << endl;
 	}
@@ -52,14 +59,12 @@ void CShape::RenderNext()
 		if (iYIndex < 0)
 			continue;
 
-		//콘솔창에 출력할 좌표를 설정한 후에 출력한다
-		CCore::GetInst()->SetConsolePos(m_tPos.x, iYIndex);
 		for (int j = 0; j < 4; j++) {
-			if (m_cShape[i][j] == '0')
+			if (m_cShape[i][j] == '0') {
+				//콘솔창에 출력할 좌표를 설정한 후에 출력한다
+				CCore::GetInst()->SetConsolePos(m_tPos.x + j, iYIndex);
 				cout << "■";
-
-			else
-				cout << "　";
+			}
 		}
 		cout << endl;
 	}
@@ -73,7 +78,20 @@ bool CShape::MoveDown()
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			if (m_cShape[i][j] == '0') {
-				if (pStage->CheckBlock(m_tPos.x + j, m_tPos.y - (2 - i))) {
+				if (pStage->CheckBlock(m_tPos.x + j, m_tPos.y - (2 - i)))
+				{
+					//바닥에 닿은 후에 현재 도형의 부분이 하나라도 좌표가 0보다 작다면 겜끝
+					for (int k = 0; k < 4; k++) {
+						for (int l = 0; l < 4; l++)
+						{
+							if (m_cShape[k][l] == '0')
+							{
+								if (m_tPos.y - (3 - k) < 0)
+									CCore::GetInst()->End();
+							}
+						}
+					}
+
 					return true;
 				}
 			}
