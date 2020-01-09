@@ -16,7 +16,6 @@ public:
 			m_pInst = new CStageManager;
 
 		return m_pInst;
-
 	}
 
 	static void DestroyInst() {

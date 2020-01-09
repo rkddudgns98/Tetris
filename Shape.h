@@ -15,6 +15,10 @@ protected:
 	int m_iWidthCount;	//기준점이 왼쪽아래이기때문에 오른쪽으로 갈 때 변수가 필요
 
 public:
+	char GetBlock(int x, int y) const {
+		return m_cShape[y][x];
+	}
+
 	//이동시 필요한 기준점 세우기
 	void SetPosition(int x, int y) {	
 		m_tPos.x = x;

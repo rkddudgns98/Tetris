@@ -1,8 +1,8 @@
 #pragma once
 
-#include<iostream>
-#include<time.h>
-#include"Macro.h"
+#include <iostream>
+#include <time.h>
+#include "Macro.h"
 #include <Windows.h>
 #include <list>
 #include "flag.h"

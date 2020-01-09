@@ -23,8 +23,6 @@ public:
 		SAFE_DELETE(m_pInst);
 	}
 private:
-	//바닥에 쌓인 도형을 표현한다
-	list<class CShape*> m_ShapeList;
 	//현재 나와있는 도형을 표현한다
 	class CShape* m_pCurShape;
 	//다음에 나올 도형을 포현한다.

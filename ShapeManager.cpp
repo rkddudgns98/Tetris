@@ -16,10 +16,6 @@ CShapeManager::CShapeManager() :
 
 CShapeManager::~CShapeManager()
 {
-	list<CShape*>::iterator iterEnd = m_ShapeList.end();
-	for (list<CShape*>::iterator iter = m_ShapeList.begin(); iter != iterEnd; ++iter) {
-		SAFE_DELETE(*iter);
-	}
 	SAFE_DELETE(m_pCurShape);
 	SAFE_DELETE(m_pNextShape);
 }
@@ -32,10 +28,15 @@ void CShapeManager::Update()
 		/*true일 경우 바닥에 닿았으므로 리스트에 추가하고 다음 도형을 현재 도형으로
 		만들고 그후 다음 도형을 생성한다.*/
 		if (m_pCurShape->MoveDown()) {
-			m_ShapeList.push_back(m_pCurShape);
+
+			//지워주기 전에 블럭을 추가해준다
+			pStage->AddBlock(m_pCurShape, m_pCurShape->GetPosition());
+
+			SAFE_DELETE(m_pCurShape);
 
 			m_pCurShape = m_pNextShape;
 			m_pCurShape->SetPosition(4, 0);
+
 
 			m_pNextShape = CreateRandomShape();
 		}
@@ -51,10 +52,6 @@ void CShapeManager::Update()
 
 void CShapeManager::Render()
 {	//현재 도형의 렌더링
-	list<CShape*>::iterator iterEnd = m_ShapeList.end();
-	for (list<CShape*>::iterator iter = m_ShapeList.begin(); iter != iterEnd; ++iter) {
-		(*iter)->Render();
-	}
 	m_pCurShape->Render();
 
 	//다음 도형의 렌더링
