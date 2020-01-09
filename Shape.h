@@ -38,7 +38,8 @@ public:
 
 public:
 	void Render();
-	void MoveDown();
+	void RenderNext();
+	bool MoveDown();
 	void MoveLeft();
 	void MoveRight();	//기준점이 왼쪽아래이기 때문에 오른쪽으로 갈때 변수필요
 	

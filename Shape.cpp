@@ -26,23 +26,55 @@ bool CShape::Init()
 void CShape::Render()	//도형출력
 {
 	for (int i = 0; i < 4; i++) {
+		int iYIndex = m_tPos.y - (3 - i);
+		if (iYIndex < 0)
+			continue;
+
 		//콘솔창에 출력할 좌표를 설정한 후에 출력한다
-		CCore::GetInst()->SetConsolePos(m_tPos.x, m_tPos.y - (3 - i));
+		CCore::GetInst()->SetConsolePos(m_tPos.x, iYIndex);
 		for (int j = 0; j < 4; j++) {
+			if (m_tPos.x + j >= STAGE_WIDTH)	//오른쪽으로갈때 벽이 안뚫리게 예외처리
+				continue;
+
 			if (m_cShape[i][j] == '0')
 				cout << "■";
-			else cout << "　";
+
+			else 
+				cout << "　";
 		}
 		cout << endl;
 	}
 }
 
-void CShape::MoveDown()
+void CShape::RenderNext()
+{
+	for (int i = 0; i < 4; i++) {
+		int iYIndex = m_tPos.y - (3 - i);
+		if (iYIndex < 0)
+			continue;
+
+		//콘솔창에 출력할 좌표를 설정한 후에 출력한다
+		CCore::GetInst()->SetConsolePos(m_tPos.x, iYIndex);
+		for (int j = 0; j < 4; j++) {
+			if (m_cShape[i][j] == '0')
+				cout << "■";
+
+			else
+				cout << "　";
+		}
+		cout << endl;
+	}
+}
+
+//true = 바닥에 닿았다,  false = 바닥에 닿지 않았다
+bool CShape::MoveDown()
 {
 	if (m_tPos.y == STAGE_HEIGHT - 1)
-		return;
+		return true;	//바닥에 닿았다
 
 	m_tPos.y++;
+
+	return false;	//바닥에 닿지 않았다
 }
 
 void CShape::MoveLeft()

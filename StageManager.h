@@ -13,11 +13,10 @@ private:
 public:
 	static CStageManager* GetInst() {
 		if (!m_pInst)
-		{
 			m_pInst = new CStageManager;
 
-			return m_pInst;
-		}
+		return m_pInst;
+
 	}
 
 	static void DestroyInst() {
@@ -26,6 +25,11 @@ public:
 
 private:
 	class CStage* m_pCurStage;
+
+public:
+	class CStage* GetCurrentStage() const {
+		return m_pCurStage;
+	}
 
 public:
 	bool Init();
