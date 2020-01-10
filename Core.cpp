@@ -19,6 +19,7 @@ CCore::~CCore() {
 
 bool CCore::Init(){
 	//콘솔 핸들 생성
+
 	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (m_hConsole == INVALID_HANDLE_VALUE)
 		return false;
@@ -31,6 +32,7 @@ bool CCore::Init(){
 }
 
 void CCore::Run() {
+	SetConsoleSize(40, 20);
 	while (m_bLoop) {
 		system("cls");
 		CShapeManager::GetInst()->Update();

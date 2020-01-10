@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <list>
 #include "flag.h"
+#include "Console.h"
 
 using namespace std;
 
