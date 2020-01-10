@@ -32,7 +32,8 @@ bool CCore::Init(){
 }
 
 void CCore::Run() {
-	SetConsoleSize(40, 20);
+
+
 	while (m_bLoop) {
 		system("cls");
 		CShapeManager::GetInst()->Update();

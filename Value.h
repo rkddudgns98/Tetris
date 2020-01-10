@@ -7,6 +7,7 @@
 #include <list>
 #include "flag.h"
 #include "Console.h"
+#include <conio.h>
 
 using namespace std;
 
